@@ -70,7 +70,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
 
-                    var combustivel by remember { mutableStateOf(0.5f) }
+                    var combustivel by remember { mutableStateOf(0.14f) }
 
                     Text(text = "⛽ Combustível",
                         modifier = Modifier.padding(bottom = 10.dp),
@@ -89,7 +89,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         }
                     )
 
-                    var potencia by remember { mutableStateOf(10f) }
+                    var potencia by remember { mutableStateOf(100f) }
                     Text(text = "⚡ Potência: ${potencia.toInt()}%",
                         modifier = Modifier.padding(top = 10.dp),
                         color = androidx.compose.ui.graphics.Color.White )
@@ -110,6 +110,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         onCheckedChange = {turboAtivo = it},
                         modifier = Modifier
                     )
+                    val potenciaMaxima = if (turboAtivo) 120f else 100f
+
+                    if (combustivel<0.15f && temperatura>110f){
+                        Text(text = "⚠ ALERTA CRÍTICO",color = androidx.compose.ui.graphics.Color.Red,modifier = Modifier.padding(top = 10.dp))
+                    }
                 }
             }
         }

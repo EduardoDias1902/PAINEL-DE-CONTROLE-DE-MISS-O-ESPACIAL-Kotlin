@@ -1,6 +1,7 @@
 package com.example.paineldecontrole
 
 import android.os.Bundle
+import android.widget.Switch
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.*
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
 import com.example.paineldecontrole.ui.theme.PAINELDECONTROLETheme
 
 class MainActivity : ComponentActivity() {
@@ -68,9 +70,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
 
-                    var combustivel by remember { mutableStateOf(0.6f) }
+                    var combustivel by remember { mutableStateOf(0.5f) }
 
-                    Text(text = "Combustível")
+                    Text(text = "⛽ Combustível",
+                        modifier = Modifier.padding(bottom = 10.dp),
+                        color = androidx.compose.ui.graphics.Color.White)
 
                     LinearProgressIndicator(
                         progress = combustivel,
@@ -85,13 +89,26 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         }
                     )
 
-                    var potencia by remember { mutableStateOf(80f) }
-                    Text(text = "Potência: ${potencia.toInt()}%" )
+                    var potencia by remember { mutableStateOf(10f) }
+                    Text(text = "⚡ Potência: ${potencia.toInt()}%",
+                        modifier = Modifier.padding(top = 10.dp),
+                        color = androidx.compose.ui.graphics.Color.White )
                     Slider(
                         value = potencia,
                         onValueChange = {potencia = it},
                         valueRange = 0f..100f,
-
+                    )
+                    val temperatura = 20 + (potencia * 1.5)
+                    Text(
+                        text = "🌡️ Temperatura: ${temperatura.toInt()}",
+                        color = androidx.compose.ui.graphics.Color.White
+                    )
+                    Text(text = "🔥Turbo",color = androidx.compose.ui.graphics.Color.White,modifier = Modifier.padding(top=10.dp))
+                    var turboAtivo by remember { mutableStateOf(false)}
+                    Switch(
+                        checked = turboAtivo,
+                        onCheckedChange = {turboAtivo = it},
+                        modifier = Modifier
                     )
                 }
             }
